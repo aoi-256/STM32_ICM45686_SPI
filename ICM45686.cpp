@@ -101,7 +101,7 @@ uint8_t ICM45686::Accel_Config(ICM45686::Mode Mode, ICM45686::Accel_Scale Scale,
 	return 0;
 }
 
-/* @brief 加速度センターの設定
+/* @brief ジャイロセンターの設定
  *
  * PWR_MGMT0レジスタで電力モードの設定
  * Gyro_CONFIGレジスタでScaleとODRの設定を行います
