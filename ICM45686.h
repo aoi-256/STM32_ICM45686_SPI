@@ -63,7 +63,7 @@ class ICM45686: private ICM45686_HAL {
 			rate_0001hz
 		};
 
-		ICM45686(SPI_HandleTypeDef* SPI_Pin);
+		ICM45686(SPI_HandleTypeDef* SpiPin, GPIO_TypeDef* CsPinType, uint16_t CsPinNum);
 
 		uint8_t Connection();
 		uint8_t Accel_Config(ICM45686::Mode, ICM45686::Accel_Scale, ICM45686::ODR);

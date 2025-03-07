@@ -8,7 +8,7 @@
 #include <ICM45686.h>
 #include <bitset>
 
-ICM45686::ICM45686(SPI_HandleTypeDef* SPI_Pin):ICM45686_HAL(SPI_Pin){
+ICM45686::ICM45686(SPI_HandleTypeDef* SpiPin, GPIO_TypeDef* CsPinType, uint16_t CsPinNum):ICM45686_HAL(SpiPin, CsPinType, CsPinNum){
 
 }
 
@@ -117,10 +117,15 @@ uint8_t ICM45686::Gyro_Config(ICM45686::Mode Mode, ICM45686::Gyro_Scale Scale,  
 
 	//現在の値を取得
 	uint8_t Now_Mode = 0x00;
-	ICM45686::Read(ICM45686_HAL::REGISTER::PWR_MGMT0, &Now_Mode, 1);
+
+	for(uint8_t i=0; i<10; i++){
+
+		ICM45686::Read(ICM45686_HAL::REGISTER::PWR_MGMT0, &Now_Mode, 1);
+	}
 
 	//取得した設定から書き込みデータを作成
 	uint8_t Command = Now_Mode |= (uint8_t)Mode << 2;
+	//Command = 0x0f;
 
 	//値が一致するまで書き込みを行う
 	uint8_t Error = 0;

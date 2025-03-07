@@ -24,14 +24,16 @@ class ICM45686_HAL {
 			WHO_AM_I   		 = 0x72
 		};
 
-		ICM45686_HAL(SPI_HandleTypeDef* SPI_Pin);
+		ICM45686_HAL(SPI_HandleTypeDef* SpiPin, GPIO_TypeDef* CsPinType, uint16_t CsPinNum);
 
 		void Write(ICM45686_HAL::REGISTER, uint8_t* Command, uint8_t Len);
 		void Read(ICM45686_HAL::REGISTER, uint8_t* Receive_buffer, uint8_t Len);
 
 	private:
 
-		SPI_HandleTypeDef* SPI_Pin;
+		SPI_HandleTypeDef* SpiPin;
+		GPIO_TypeDef* CsPinType;
+		uint16_t CsPinNum;
 };
 
 #endif /* INC_ICM45686_HAL_H_ */
